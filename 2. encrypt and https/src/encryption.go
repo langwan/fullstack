@@ -16,11 +16,6 @@ import (
 )
 
 
-/**
-1. 对称
-2. 不对称
-3. 摘要
-*/
 
 func SymmetricEncryptSB(key string, data []byte) []byte {
 	hexKey := []byte(key)
@@ -144,19 +139,6 @@ func S2H(string string) string {
 	return hex.EncodeToString([]byte(string))
 }
 
-func GetPriFromAB(priA string, priB string, realSecretKey string) (string, error) {
-	priEncrypt := priA + priB
-	priEncryptHex, err := hex.DecodeString(priEncrypt)
-	if err != nil {
-		return "", err
-	}
-	realSecretKeyHex, err := hex.DecodeString(realSecretKey)
-	priHex, err := SymmetricDecryptBB(realSecretKeyHex, priEncryptHex)
-	if err != nil {
-		return "", err
-	}
-	return string(priHex), nil
-}
 
 func RSACreate() (pub string, pri string) {
 	privateKey, _ := rsa.GenerateKey(rand.Reader, 2048)
